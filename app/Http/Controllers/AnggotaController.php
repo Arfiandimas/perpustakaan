@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AnggotaRequest;
 use App\Models\Anggota;
 use App\Services\Anggota\AddUpdateAnggotaService;
+use App\Services\Anggota\DeleteAnggotaService;
 use App\Services\Anggota\GetAnggotaServie;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,13 @@ class AnggotaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Anggota $request)
+    public function store(AnggotaRequest $request)
     {
-        //
+        $member = (new AddUpdateAnggotaService($request))->call();
+        if (!$member->status()) {
+            return redirect()->back()->with(['status'=> $member->state(), 'message'=> $member->message()]);
+        }
+        return redirect()->route('anggota.show', $member->result())->with(['status'=> $member->state(), 'message'=> $member->message()]);
     }
 
     /**
@@ -82,6 +87,10 @@ class AnggotaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $member = (new DeleteAnggotaService($id))->call();
+        if (!$member->status()) {
+            return redirect()->back()->with(['status'=> $member->state(), 'message'=> $member->message()]);
+        }
+        return redirect()->route('anggota.index')->with(['status'=> $member->state(), 'message'=> $member->message()]);
     }
 }
