@@ -10,30 +10,26 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <section>
-                        <form method="post" action="#" class="space-y-6">
+                        <form method="post" action="{{ route('anggota.update', ['anggota' => $member->id]) }}" class="space-y-6">
+                            @csrf
+                            @method('PUT')
+
                             <div>
-                                <x-input-label for="title" :value="__('Title')" />
-                                <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" />
-                                <x-input-error :messages="''" class="mt-2" />
+                                <x-input-label for="nama" :value="__('Nama')" />
+                                <x-text-input id="nama" name="nama" type="text" class="mt-1 block w-full" :value="old('nama', $member->nama)"/>
+                                <x-input-error :messages="$errors->get('nama')" class="mt-2" />
                             </div>
 
                             <div>
-                                <x-input-label for="content" :value="__('Content')" />
-                                <textarea id="content" name="content" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" rows="6"></textarea>
-                                <x-input-error :messages="''" class="mt-2" />
+                                <x-input-label for="no_anggota" :value="__('Nomor Anggota')" />
+                                <x-text-input id="no_anggota" name="no_anggota" type="number" class="mt-1 block w-full" :value="old('no_anggota', $member->no_anggota)"/>
+                                <x-input-error :messages="$errors->get('no_anggota')" class="mt-2" />
                             </div>
 
                             <div>
-                                <x-input-label for="published_at" :value="__('Publish Date')" />
-                                <x-text-input id="published_at" name="published_at" type="date" class="mt-1 block w-full" />
-                                <x-input-error :messages="''" class="mt-2" />
-                            </div>
-
-                            <div>
-                                <label for="is_draft" class="inline-flex items-center">
-                                    <input id="is_draft" type="checkbox" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="is_draft">
-                                    <span class="ms-2 text-sm text-gray-600">{{ __('Save as Draft') }}</span>
-                                </label>
+                                <x-input-label for="tanggal_lahir" :value="__('Publish Date')" />
+                                <x-text-input id="tanggal_lahir" name="tanggal_lahir" type="date" class="mt-1 block w-full" :value="old('tanggal_lahir', $member->tanggal_lahir)"/>
+                                <x-input-error :messages="$errors->get('tanggal_lahir')" class="mt-2" />
                             </div>
 
                             <div class="flex items-center gap-4">

@@ -17,7 +17,7 @@
                         <div class="mt-4 flex items-end justify-between">
                             <div>Jumlah Pinjaman: {{$member->stock}}</div>
                             <div>
-                                <a href="#" class="text-blue-500">Edit</a> /
+                                <a href="{{ route('anggota.edit', ['anggota' => $member->id]) }}" class="text-blue-500">Edit</a> /
                                 <form action="#" method="POST" class="inline">
                                     <button class="text-red-500">Delete</button>
                                 </form>

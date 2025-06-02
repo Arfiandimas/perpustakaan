@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('no_anggota');
             $table->date('tanggal_lahir');
             $table->string('nama', 100);
-            $table->unsignedInteger('stock');
+            $table->unsignedInteger('stock')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
