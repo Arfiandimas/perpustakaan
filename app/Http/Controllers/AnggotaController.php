@@ -6,7 +6,7 @@ use App\Http\Requests\AnggotaRequest;
 use App\Models\Anggota;
 use App\Services\Anggota\AddUpdateAnggotaService;
 use App\Services\Anggota\DeleteAnggotaService;
-use App\Services\Anggota\GetAnggotaServie;
+use App\Services\Anggota\GetAnggotaService;
 use Illuminate\Http\Request;
 
 class AnggotaController extends Controller
@@ -16,7 +16,7 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        $members = (new GetAnggotaServie())->call();
+        $members = (new GetAnggotaService())->call();
         if (!$members->status()) {
             return redirect()->back()->with(['status'=> $members->state(), 'message'=> $members->message()]);
         }
@@ -49,7 +49,7 @@ class AnggotaController extends Controller
      */
     public function show(string $id)
     {
-        $member = (new GetAnggotaServie())->setId((int)$id)->call();
+        $member = (new GetAnggotaService())->setId((int)$id)->call();
         if (!$member->status()) {
             return redirect()->back()->with(['status'=> $member->state(), 'message'=> $member->message()]);
         }
@@ -62,7 +62,7 @@ class AnggotaController extends Controller
      */
     public function edit(string $id)
     {
-        $member = (new GetAnggotaServie())->setId((int)$id)->call();
+        $member = (new GetAnggotaService())->setId((int)$id)->call();
         if (!$member->status()) {
             return redirect()->back()->with(['status'=> $member->state(), 'message'=> $member->message()]);
         }

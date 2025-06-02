@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Services\Anggota;
+namespace App\Services\Buku;
 
 use App\Base\ServiceBase;
-use App\Models\Anggota;
+use App\Models\Buku;
 use App\Responses\ServiceResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class AddUpdateAnggotaService extends ServiceBase
+class AddUpdateBukuService extends ServiceBase
 {
     protected Request $request;
     protected ?int $id;
@@ -29,12 +29,15 @@ class AddUpdateAnggotaService extends ServiceBase
         try {
             $this->request->request->remove('_token');
             $this->request->request->remove('_method');
+            $this->request->request->add(['dimensi' => $this->request->lebar.' x '.$this->request->tinggi]);
+            $this->request->request->remove('lebar');
+            $this->request->request->remove('tinggi');
             if ($this->id) {
-                $data = Anggota::findOrFail($this->id);
+                $data = Buku::findOrFail($this->id);
                 $data->fill($this->request->all());
                 $data->save();
             } else {
-                $data = Anggota::create($this->request->all());
+                $data = Buku::create($this->request->all());
             }
             return self::success($data);
         } catch (\Throwable $th) {

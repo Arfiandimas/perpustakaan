@@ -1,25 +1,23 @@
 <?php
 
-namespace App\Services\Anggota;
+namespace App\Services\Buku;
 
 use App\Base\ServiceBase;
-use App\Models\Anggota;
+use App\Models\Buku;
 use App\Responses\ServiceResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class AddUpdateAnggotaService extends ServiceBase
+class GetBukuService extends ServiceBase
 {
-    protected Request $request;
     protected ?int $id;
     
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $this->request = $request;
         $this->id = null;
     }
 
-    public function setId($id){
+    public function setId($id)
+    {
         $this->id = $id;
         return $this;
     }
@@ -27,14 +25,10 @@ class AddUpdateAnggotaService extends ServiceBase
     public function call(): ServiceResponse
     {
         try {
-            $this->request->request->remove('_token');
-            $this->request->request->remove('_method');
             if ($this->id) {
-                $data = Anggota::findOrFail($this->id);
-                $data->fill($this->request->all());
-                $data->save();
+                $data = Buku::whereId($this->id)->first();
             } else {
-                $data = Anggota::create($this->request->all());
+                $data = Buku::orderBy("updated_at", "desc")->paginate(10);
             }
             return self::success($data);
         } catch (\Throwable $th) {

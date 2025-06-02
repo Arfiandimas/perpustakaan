@@ -4,11 +4,10 @@ namespace App\Services\Anggota;
 
 use App\Base\ServiceBase;
 use App\Models\Anggota;
-use App\Models\DataPraktikum;
 use App\Responses\ServiceResponse;
 use Illuminate\Support\Facades\Log;
 
-class GetAnggotaServie extends ServiceBase
+class GetAnggotaService extends ServiceBase
 {
     protected ?int $id;
     

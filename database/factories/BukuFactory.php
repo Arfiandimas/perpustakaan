@@ -17,7 +17,7 @@ class BukuFactory extends Factory
     public function definition(): array
     {
         return [
-            'judul_buku' => rand(1111111111, 9999999999),
+            'judul_buku' => fake()->sentence($nbWords = rand(2,6), $variableNbWords = true),
             'penerbit' => fake()->company(),
             'dimensi' => fake()->randomElement([
                 '14.5 x 21',
