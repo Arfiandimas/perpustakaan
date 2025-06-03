@@ -39,7 +39,7 @@ class AddUpdateBukuService extends ServiceBase
             } else {
                 $data = Buku::create($this->request->all());
             }
-            return self::success($data);
+            return self::success($data, 'berhasil');
         } catch (\Throwable $th) {
             Log::error(self::class, [
                 'Message ' => $th->getMessage(),

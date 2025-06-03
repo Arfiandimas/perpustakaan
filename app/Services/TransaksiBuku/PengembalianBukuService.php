@@ -37,7 +37,7 @@ class PengembalianBukuService extends ServiceBase
             Anggota::whereId($data->anggota_id)->update(["stock" =>TransaksiPeminjaman::where(['anggota_id' => $data->anggota_id, 'tanggal_kembali' => null])->count()]);
             
             DB::commit();
-            return self::success($data);
+            return self::success($data, "berhasil melakukan pengembalian");
         } catch (\Throwable $th) {
             DB::rollBack();
             Log::error(self::class, [

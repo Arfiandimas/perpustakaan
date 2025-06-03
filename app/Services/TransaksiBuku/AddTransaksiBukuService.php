@@ -40,7 +40,7 @@ class AddTransaksiBukuService extends ServiceBase
             $data = TransaksiPeminjaman::create($this->request->all());
 
             DB::commit();
-            return self::success($data);
+            return self::success($data, 'berhasil melakukan peminjaman');
         } catch (\Throwable $th) {
             DB::rollBack();
             Log::error(self::class, [

@@ -36,7 +36,7 @@ class AddUpdateAnggotaService extends ServiceBase
             } else {
                 $data = Anggota::create($this->request->all());
             }
-            return self::success($data);
+            return self::success($data, 'Berhasil');
         } catch (\Throwable $th) {
             Log::error(self::class, [
                 'Message ' => $th->getMessage(),
