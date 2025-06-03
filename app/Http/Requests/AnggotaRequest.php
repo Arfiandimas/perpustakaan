@@ -13,7 +13,7 @@ class AnggotaRequest extends ReqValidator
     {
         $rules = [
             'nama' => 'string|max:100',
-            'no_anggota' => 'integer|max:999999999999',
+            'no_anggota' => 'integer|max:999999999999||unique:anggotas,no_anggota,'.$this->id,
             'tanggal_lahir' => 'date_format:Y-m-d'
         ];
         
