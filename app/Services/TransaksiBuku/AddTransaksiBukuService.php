@@ -35,6 +35,9 @@ class AddTransaksiBukuService extends ServiceBase
             // update stock buku
             $buku = Buku::whereId($this->request->buku_id)->first();
             $buku->stock = $buku->stock - 1;
+            if ($buku->stock < 0) {
+                return self::error(null, 'stok buku habis');
+            }
             $buku->update();
 
             $data = TransaksiPeminjaman::create($this->request->all());
