@@ -44,7 +44,7 @@ class GetTransaksiBukuService extends ServiceBase
                     ->when($this->pengembalian, function ($query){
                         $query->where('tanggal_kembali', '!=', null);
                     })
-                    ->orderBy("tanggal_pinjam", "asc")
+                    ->orderBy("created_at", "desc")
                     ->paginate(10);
             }
             return self::success($data);

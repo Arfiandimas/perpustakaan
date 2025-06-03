@@ -10,15 +10,23 @@ use Illuminate\Support\Facades\Log;
 class GetBukuService extends ServiceBase
 {
     protected ?int $id;
+    protected bool $isDropdown;
     
     public function __construct()
     {
         $this->id = null;
+        $this->isDropdown = false;
     }
 
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function isDropdown()
+    {
+        $this->isDropdown = true;
         return $this;
     }
 
@@ -28,7 +36,15 @@ class GetBukuService extends ServiceBase
             if ($this->id) {
                 $data = Buku::whereId($this->id)->first();
             } else {
-                $data = Buku::orderBy("updated_at", "desc")->paginate(10);
+                if (!$this->isDropdown) {
+                    $data = Buku::orderBy("updated_at", "desc")->paginate(10);
+                } else {
+                    $data = Buku::
+                    when($this->isDropdown, function ($query){
+                        $query->where('stock', '>', 0);
+                    })
+                    ->orderBy("updated_at", "desc")->get();
+                }
             }
             return self::success($data);
         } catch (\Throwable $th) {

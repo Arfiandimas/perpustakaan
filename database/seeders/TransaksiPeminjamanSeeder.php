@@ -15,14 +15,14 @@ class TransaksiPeminjamanSeeder extends Seeder
      */
     public function run(): void
     {
-        $buku = Buku::factory()->count(50)->create();
+        $buku = Buku::factory()->count(10)->create();
 
         Anggota::factory()
         ->count(50)
         ->create()
         ->each(function ($anggota) use ($buku) {
             // Pilih jumlah random buku yang dipinjam anggota ini
-            $jumlahDipinjam = rand(1, 10);
+            $jumlahDipinjam = rand(1, 3);
 
             // Ambil buku acak dari koleksi
             $bukuDipinjam = $buku->random($jumlahDipinjam);

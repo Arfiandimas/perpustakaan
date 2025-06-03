@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PeminjamanRequest;
+use App\Services\Anggota\GetAnggotaService;
+use App\Services\Buku\GetBukuService;
+use App\Services\TransaksiBuku\AddTransaksiBukuService;
 use App\Services\TransaksiBuku\PengembalianBukuService;
 use App\Services\TransaksiBuku\GetTransaksiBukuService;
 use Illuminate\Http\Request;
@@ -26,15 +30,30 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
-        return view('peminjaman.create');
+        $members = (new GetAnggotaService())->call();
+        if (!$members->status()) {
+            return redirect()->back()->with(['status'=> $members->state(), 'message'=> $members->message()]);
+        }
+        $books = (new GetBukuService())->isDropdown()->call();
+        if (!$books->status()) {
+            return redirect()->back()->with(['status'=> $books->state(), 'message'=> $books->message()]);
+        }
+        
+        $members = $members->result();
+        $books = $books->result();
+        return view('peminjaman.create', compact('members', 'books'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PeminjamanRequest $request)
     {
-        //
+        $data = (new AddTransaksiBukuService($request))->call();
+        if (!$data->status()) {
+            return redirect()->back()->with(['status'=> $data->state(), 'message'=> $data->message()]);
+        }
+        return redirect()->route('peminjaman.index', $data->result())->with(['status'=> $data->state(), 'message'=> $data->message()]);
     }
 
     /**
