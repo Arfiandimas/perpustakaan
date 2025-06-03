@@ -1,6 +1,6 @@
 # Laravel Project Setup Guide
 
-This guide explains how to set up the Laravel 11 project, run database migrations and seeders, and start the development server with frontend assets.
+This guide explains how to set up the Laravel 12 project, run database migrations and seeders, and start the development server with frontend assets.
 
 ---
 
