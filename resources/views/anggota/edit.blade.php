@@ -27,7 +27,7 @@
                             </div>
 
                             <div>
-                                <x-input-label for="tanggal_lahir" :value="__('Publish Date')" />
+                                <x-input-label for="tanggal_lahir" :value="__('Tanggal Lahir')" />
                                 <x-text-input id="tanggal_lahir" name="tanggal_lahir" type="date" class="mt-1 block w-full" :value="old('tanggal_lahir', $member->tanggal_lahir)"/>
                                 <x-input-error :messages="$errors->get('tanggal_lahir')" class="mt-2" />
                             </div>

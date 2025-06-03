@@ -18,6 +18,9 @@ class DeleteAnggotaService extends ServiceBase
     {
         try {
             $data = Anggota::where('id', $this->id)->first();
+            if ($data->stock > 0) {
+                return self::error(null, 'Gagal menghapus data, anggota masih memiliki pinjaman buku');
+            }
             if ($data) {
                 $data->delete();
                 return self::success(null, 'Berhasil menghapus data');

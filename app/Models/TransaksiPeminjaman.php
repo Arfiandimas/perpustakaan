@@ -15,11 +15,11 @@ class TransaksiPeminjaman extends Model
 
     public function anggota(): BelongsTo
     {
-        return $this->belongsTo(Anggota::class, 'anggota_id', 'id');
+        return $this->belongsTo(Anggota::class, 'anggota_id', 'id')->withTrashed();
     }
 
     public function buku(): BelongsTo
     {
-        return $this->belongsTo(Buku::class, 'buku_id', 'id');
+        return $this->belongsTo(Buku::class, 'buku_id', 'id')->withTrashed();
     }
 }
