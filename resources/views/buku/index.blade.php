@@ -17,7 +17,7 @@
                             </div>
                             <div class="mt-4 flex items-end justify-between">
                                 <div>
-                                    <div>Tersedia: {{$book->stock}}</div>
+                                    <div>Tersedia: <strong>{{$book->stock}}</strong></div>
                                 </div>
                                 <div>
                                     <a href="{{ route('buku.edit', ['buku' => $book->id]) }}" class="text-blue-500">Edit</a> /

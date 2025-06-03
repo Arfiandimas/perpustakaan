@@ -13,12 +13,12 @@
                     @forelse ($peminjaman as $item)
                         <div class="rounded-md border p-5 shadow">
                             <div class="flex items-center gap-2">
-                                <h3>{{$item?->anggota?->nama}}</h3>
+                                <h3><strong>{{$item?->anggota?->nama}}</strong></h3>
                             </div>
                             <div class="mt-4 flex items-end justify-between">
                                 <div>
-                                    <div>Buku: {{$item?->buku?->judul_buku}}</div>
-                                    <div>Tanggal Pinjam: {{ date('d-m-Y', strtotime($item->tanggal_pinjam)) }}</div>
+                                    <div>Buku: <strong>{{$item?->buku?->judul_buku}}</strong></div>
+                                    <div>Tanggal Pinjam: <strong>{{ date('d-m-Y', strtotime($item->tanggal_pinjam)) }}</strong></div>
                                 </div>
                                 <div>
                                     @include('peminjaman.edit', [

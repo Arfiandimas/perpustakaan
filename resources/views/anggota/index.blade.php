@@ -16,7 +16,7 @@
                                 <h3><a href="{{ route('anggota.show', ['anggota' => $member->id]) }}" class="text-blue-500">{{$member->nama}}</a></h3>
                             </div>
                             <div class="mt-4 flex items-end justify-between">
-                                <div>Jumlah Pinjaman: {{$member->stock}}</div>
+                                <div>Jumlah Pinjaman: <strong>{{$member->stock}}</strong></div>
                                 <div>
                                     <a href="{{ route('anggota.edit', ['anggota' => $member->id]) }}" class="text-blue-500">Edit</a> /
                                     <form action="{{ route('anggota.destroy', ['anggota' => $member->id]) }}" method="POST" class="inline">

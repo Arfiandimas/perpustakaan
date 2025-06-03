@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,27 +20,17 @@ Route::middleware('auth')->group(function () {
         'anggota' => 'anggota'
     ]);
 
-    // Buku
-    Route::resource('peminjaman', PeminjamanController::class);
+    // Peminjaman
+    Route::resource('peminjaman', PeminjamanController::class)->except([
+        'show', 'edit', 'destroy',
+    ]);
+
+    // Pengembalian
+    Route::resource('pengembalian', PengembalianController::class)->only([
+        'index'
+    ]);
 });
 
-
-// Pengembalian
-Route::get('/pengembalian', function () {
-    return view('pengembalian.index');
-})->name('pengembalian.index');
-
-Route::get('/pengembalian/create', function () {
-    return view('pengembalian.create');
-})->name('pengembalian.create');
-
-Route::get('/pengembalian/show', function () {
-    return view('pengembalian.show');
-});
-
-Route::get('/pengembalian/edit', function () {
-    return view('pengembalian.edit');
-});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
