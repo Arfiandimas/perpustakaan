@@ -9,8 +9,8 @@ This guide explains how to set up the Laravel 11 project, run database migration
 1. **Clone repository and install dependencies**
 
 ```bash
-git clone https://github.com/Arfiandimas/laravel-simple-blog
-cd laravel-simple-blog
+git clone https://github.com/Arfiandimas/perpustakaan.git
+cd perpustakaan
 composer install
 cp .env.example .env
 php artisan key:generate
