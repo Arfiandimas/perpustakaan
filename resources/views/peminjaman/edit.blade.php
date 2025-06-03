@@ -1,48 +1,31 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Post') }}
-        </h2>
-    </x-slot>
+<div id="modal-update-{{ $id }}" tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-[100vh] bg-black bg-opacity-40 flex items-center justify-center">
+    
+    <div class="relative w-full max-w-md bg-white rounded-lg shadow-lg p-6">
+        <!-- Close Button -->
+        <button type="button" class="absolute top-3 right-3 text-gray-500 hover:text-gray-900"
+            data-modal-hide="modal-update-{{ $id }}">
+            ×
+        </button>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <section>
-                        <form method="post" action="#" class="space-y-6">
-                            <div>
-                                <x-input-label for="title" :value="__('Title')" />
-                                <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" />
-                                <x-input-error :messages="''" class="mt-2" />
-                            </div>
+        <h3 class="text-lg font-semibold mb-4">Pengembalian Buku</h3>
 
-                            <div>
-                                <x-input-label for="content" :value="__('Content')" />
-                                <textarea id="content" name="content" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" rows="6"></textarea>
-                                <x-input-error :messages="''" class="mt-2" />
-                            </div>
+        <form action="{{ route('peminjaman.update', ['peminjaman' => $data->id]) }}" method="POST" class="space-y-4">
+            @csrf
+            @method('PUT')
 
-                            <div>
-                                <x-input-label for="published_at" :value="__('Publish Date')" />
-                                <x-text-input id="published_at" name="published_at" type="date" class="mt-1 block w-full" />
-                                <x-input-error :messages="''" class="mt-2" />
-                            </div>
-
-                            <div>
-                                <label for="is_draft" class="inline-flex items-center">
-                                    <input id="is_draft" type="checkbox" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="is_draft">
-                                    <span class="ms-2 text-sm text-gray-600">{{ __('Save as Draft') }}</span>
-                                </label>
-                            </div>
-
-                            <div class="flex items-center gap-4">
-                                <x-primary-button>{{ __('Update') }}</x-primary-button>
-                            </div>
-                        </form>
-                    </section>
-                </div>
+            <div>
+                <x-input-label for="tanggal_kembali" :value="__('Tanggal Kembali')" />
+                <x-text-input id="tanggal_kembali" name="tanggal_kembali" type="date"
+                    class="mt-1 block w-full"
+                    :value="old('tanggal_kembali', $data->tanggal_kembali)" />
+                <x-input-error :messages="$errors->get('tanggal_kembali')" class="mt-2" />
             </div>
-        </div>
+
+            <div class="flex justify-end">
+                <button type="submit"
+                    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Simpan</button>
+            </div>
+        </form>
     </div>
-</x-app-layout>
+</div>

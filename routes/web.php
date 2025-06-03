@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,24 +18,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('anggota', AnggotaController::class)->parameters([
         'anggota' => 'anggota'
     ]);
+
+    // Buku
+    Route::resource('peminjaman', PeminjamanController::class);
 });
 
-// Peminjaman
-Route::get('/peminjaman', function () {
-    return view('peminjaman.index');
-})->name('peminjaman.index');
-
-Route::get('/peminjaman/create', function () {
-    return view('peminjaman.create');
-})->name('peminjaman.create');
-
-Route::get('/peminjaman/show', function () {
-    return view('peminjaman.show');
-});
-
-Route::get('/peminjaman/edit', function () {
-    return view('peminjaman.edit');
-});
 
 // Pengembalian
 Route::get('/pengembalian', function () {
